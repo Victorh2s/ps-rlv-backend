@@ -1,0 +1,52 @@
+name: Run E2E Tests
+
+on: [pull_request]
+
+jobs:
+  run-e2e-tests:
+    name: Run E2E Tests
+    runs-on: ubuntu-latest
+
+    services:
+      minio:
+        hostname: minio
+        image: 'minio/minio:latest'
+        container_name: minio
+        ports:
+          - '9001:9001'
+        volumes:
+          - minio-data:/data
+        environment:
+          MINIO_ROOT_USER: minio
+          MINIO_ROOT_PASSWORD: minio123
+        command: server /data --console-address ":9001"
+        networks:
+          - bigdata_dev
+
+      postgresql-master:
+        image: docker.io/bitnami/postgresql:17
+        ports:
+          - '5433:5432'
+        volumes:
+          - 'postgresql_master_data:/bitnami/postgresql'
+        environment:
+          - POSTGRESQL_USERNAME=docker
+          - POSTGRESQL_PASSWORD=dockler
+          - POSTGRESQL_DATABASE=rlv-database
+        networks:
+          - bigdata_dev
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run test:e2e
+        env:
+          JWT_SECRET: testing
+          DATABASE_URL: "postgresql://docker:docker@localhost:5433/rlv-database?schema=public"

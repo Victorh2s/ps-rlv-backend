@@ -1,0 +1,42 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+services:
+
+  minio:
+    hostname: minio
+    image: 'minio/minio:latest'
+    container_name: minio
+    ports:
+      - '9001:9001'
+    volumes:
+      - minio-data:/data
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+    command: server /data --console-address ":9001"
+    networks:
+      - bigdata_dev
+
+  postgresql-master:
+    image: docker.io/bitnami/postgresql:17
+    ports:
+      - '5433:5432'
+    volumes:
+      - 'postgresql_master_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=dockler
+      - POSTGRESQL_DATABASE=rlv-database
+    networks:
+      - bigdata_dev
+
+networks:
+  bigdata_dev:
+    driver: bridge
+
+volumes:
+  minio-data:
+    driver: local
+  postgresql_master_data:
+    driver: local

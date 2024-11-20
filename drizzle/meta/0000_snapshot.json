@@ -1,0 +1,201 @@
+{
+  "id": "e7cebef5-83a1-4dd8-a760-ff2dcc2b8159",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.document": {
+      "name": "document",
+      "schema": "",
+      "columns": {
+        "ID": {
+          "name": "ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "document_ID_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "NOME_DOCUMENTO": {
+          "name": "NOME_DOCUMENTO",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "TIPO_DOCUMENTO": {
+          "name": "TIPO_DOCUMENTO",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ORIGEM_DOCUMENTO": {
+          "name": "ORIGEM_DOCUMENTO",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "EMITENTE": {
+          "name": "EMITENTE",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "VALOR_TRIBUTO": {
+          "name": "VALOR_TRIBUTO",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "VALOR_LIQUIDO": {
+          "name": "VALOR_LIQUIDO",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ANEXO_DOCUMENTO": {
+          "name": "ANEXO_DOCUMENTO",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "CREATED_AT": {
+          "name": "CREATED_AT",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UPDATED_AT": {
+          "name": "UPDATED_AT",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "DELETED_AT": {
+          "name": "DELETED_AT",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.user": {
+      "name": "user",
+      "schema": "",
+      "columns": {
+        "ID": {
+          "name": "ID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "user_ID_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "USERNAME": {
+          "name": "USERNAME",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "EMAIL": {
+          "name": "EMAIL",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "PASSWORD": {
+          "name": "PASSWORD",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "CREATED_AT": {
+          "name": "CREATED_AT",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "UPDATED_AT": {
+          "name": "UPDATED_AT",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "DELETED_AT": {
+          "name": "DELETED_AT",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "user_EMAIL_unique": {
+          "name": "user_EMAIL_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "EMAIL"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.roles": {
+      "name": "roles",
+      "schema": "public",
+      "values": [
+        "guest",
+        "user",
+        "admin"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
