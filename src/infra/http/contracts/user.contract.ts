@@ -35,4 +35,27 @@ export const userContract = c.router({
         ),
     }),
   },
+
+  updateUser: {
+    method: "PATCH",
+    path: "/user/update-username/:id",
+    summary: "Update the username of an existing user in the system.",
+    responses: {
+      200: c.type<{ message: string }>(),
+      400: c.type<{ error: string }>(),
+    },
+    pathParams: z.object({
+      id: z.coerce.number(),
+    }),
+    body: z.object({
+      username: z
+        .string()
+        .min(3, "O campo username precisa ter no mínimo 3 caracteres")
+        .max(20, "O campo username precisa ter no máximo 20 caracteres")
+        .regex(
+          /^[a-zA-Z0-9._-]+$/,
+          "O campo username contém caracteres inválidos",
+        ),
+    }),
+  },
 });

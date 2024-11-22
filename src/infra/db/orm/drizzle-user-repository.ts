@@ -32,4 +32,22 @@ export class DrizzleUserRepository implements UserRepository {
       .limit(1);
     return user[0];
   }
+
+  async findUserById(userId: number) {
+    const user = await this.db
+      .select()
+      .from(schema.usersTable)
+      .where(eq(schema.usersTable.id, userId))
+      .limit(1);
+    return user[0];
+  }
+
+  async updateUserUsername(newUsername: string, userId: number) {
+    await this.db
+      .update(schema.usersTable)
+      .set({ username: newUsername })
+      .where(eq(schema.usersTable.id, userId));
+
+    return;
+  }
 }

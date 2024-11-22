@@ -11,3 +11,9 @@ export class UsernameAlreadyInUseError extends HttpException {
     super("Nome de usuário já em uso.", HttpStatus.CONFLICT);
   }
 }
+
+export class UsernameNotFoundError extends HttpException {
+  constructor() {
+    super("Nenhum usuário foi encontrado.", HttpStatus.NOT_FOUND);
+  }
+}
