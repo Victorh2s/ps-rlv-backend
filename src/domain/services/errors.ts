@@ -18,8 +18,14 @@ export class UsernameNotFoundError extends HttpException {
   }
 }
 
-export class UserNotAuthorizaded extends HttpException {
+export class UserNotAuthorizadedError extends HttpException {
   constructor() {
     super("Email ou senha inválidos.", HttpStatus.UNAUTHORIZED);
+  }
+}
+
+export class AccessDeniedError extends HttpException {
+  constructor() {
+    super("Acesso negado.", HttpStatus.UNAUTHORIZED);
   }
 }
