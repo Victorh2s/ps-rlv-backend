@@ -23,7 +23,3 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"DELETED_AT" timestamp,
 	CONSTRAINT "users_EMAIL_unique" UNIQUE("EMAIL")
 );
---> statement-breakpoint
-DROP TABLE "document" CASCADE;--> statement-breakpoint
-DROP TABLE "user" CASCADE;--> statement-breakpoint
-DROP TYPE "public"."roles";

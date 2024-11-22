@@ -1,6 +1,6 @@
 {
-  "id": "717bfa82-f0bb-462f-a2e4-1119bb235b93",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "f28d3e46-e856-45e8-a1ee-7b96ea5a987f",
+  "prevId": "191ee28c-03c2-4220-90ad-0c307b3c53a4",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -8,14 +8,14 @@
       "name": "documents",
       "schema": "",
       "columns": {
-        "ID": {
-          "name": "ID",
+        "id": {
+          "name": "id",
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "documents_ID_seq",
+            "name": "documents_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -25,63 +25,63 @@
             "cycle": false
           }
         },
-        "NOME_DOCUMENTO": {
-          "name": "NOME_DOCUMENTO",
+        "nome_documento": {
+          "name": "nome_documento",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "TIPO_DOCUMENTO": {
-          "name": "TIPO_DOCUMENTO",
+        "tipo_documento": {
+          "name": "tipo_documento",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "ORIGEM_DOCUMENTO": {
-          "name": "ORIGEM_DOCUMENTO",
+        "origem_documento": {
+          "name": "origem_documento",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "EMITENTE": {
-          "name": "EMITENTE",
+        "emitente": {
+          "name": "emitente",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "VALOR_TRIBUTO": {
-          "name": "VALOR_TRIBUTO",
+        "valor_tributo": {
+          "name": "valor_tributo",
           "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": false
         },
-        "VALOR_LIQUIDO": {
-          "name": "VALOR_LIQUIDO",
+        "valor_liquido": {
+          "name": "valor_liquido",
           "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": false
         },
-        "ANEXO_DOCUMENTO": {
-          "name": "ANEXO_DOCUMENTO",
+        "anexo_documento": {
+          "name": "anexo_documento",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "CREATED_AT": {
-          "name": "CREATED_AT",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "UPDATED_AT": {
-          "name": "UPDATED_AT",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
-        "DELETED_AT": {
-          "name": "DELETED_AT",
+        "deleted_at": {
+          "name": "deleted_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
@@ -105,14 +105,14 @@
       "name": "users",
       "schema": "",
       "columns": {
-        "ID": {
-          "name": "ID",
+        "id": {
+          "name": "id",
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "users_ID_seq",
+            "name": "users_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -122,39 +122,39 @@
             "cycle": false
           }
         },
-        "USERNAME": {
-          "name": "USERNAME",
+        "username": {
+          "name": "username",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "EMAIL": {
-          "name": "EMAIL",
+        "email": {
+          "name": "email",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "PASSWORD": {
-          "name": "PASSWORD",
+        "password": {
+          "name": "password",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "CREATED_AT": {
-          "name": "CREATED_AT",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "UPDATED_AT": {
-          "name": "UPDATED_AT",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
-        "DELETED_AT": {
-          "name": "DELETED_AT",
+        "deleted_at": {
+          "name": "deleted_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
@@ -164,11 +164,11 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_EMAIL_unique": {
-          "name": "users_EMAIL_unique",
+        "users_email_unique": {
+          "name": "users_email_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "EMAIL"
+            "email"
           ]
         }
       },
