@@ -1,6 +1,8 @@
 import { Module } from "@nestjs/common";
 import { Pool } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
+import { UserRepository } from "src/domain/repositories/user-repository";
+import { DrizzleUserRepository } from "./orm/drizzle-user-repository";
 
 @Module({
   imports: [],
@@ -16,7 +18,11 @@ import { drizzle } from "drizzle-orm/node-postgres";
         return db;
       },
     },
+    {
+      provide: UserRepository,
+      useClass: DrizzleUserRepository,
+    },
   ],
-  exports: ["DATABASE_CONNECTION"],
+  exports: [UserRepository],
 })
 export class DatabaseModule {}
