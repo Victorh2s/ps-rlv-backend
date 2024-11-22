@@ -3,6 +3,7 @@ import { RegisterUserService } from "src/domain/services/user/register-user.serv
 import { NestRequestShapes, TsRest, TsRestRequest } from "@ts-rest/nest";
 import { userContract } from "../contracts/user.contract";
 import { UpdateUserService } from "src/domain/services/user/update-user.service";
+import { AuthenticateUserService } from "src/domain/services/user/authenticate-user.service";
 
 type RequestShapes = NestRequestShapes<typeof userContract>;
 
@@ -11,6 +12,7 @@ export class UserController {
   constructor(
     private readonly registerUserService: RegisterUserService,
     private readonly updateUserService: UpdateUserService,
+    private readonly authenticateUserService: AuthenticateUserService,
   ) {}
 
   @TsRest(userContract.registerUser)
@@ -48,6 +50,25 @@ export class UserController {
       status: 200 as const,
       body: {
         message: "Username do usuário atualizado com sucesso",
+      },
+    };
+  }
+
+  @TsRest(userContract.signInUser)
+  async signInUser(
+    @TsRestRequest()
+    { body: { email, password } }: RequestShapes["signInUser"],
+  ) {
+    const authInfo = await this.authenticateUserService.execute({
+      email,
+      password,
+    });
+
+    return {
+      status: 200 as const,
+      body: {
+        message: "Token de autenticação gerado com sucesso.",
+        authInfo,
       },
     };
   }

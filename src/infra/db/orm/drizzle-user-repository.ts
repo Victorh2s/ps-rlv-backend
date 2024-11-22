@@ -50,4 +50,13 @@ export class DrizzleUserRepository implements UserRepository {
 
     return;
   }
+
+  async findUserByEmail(email: string) {
+    const user = await this.db
+      .select()
+      .from(schema.usersTable)
+      .where(eq(schema.usersTable.email, email))
+      .limit(1);
+    return user[0];
+  }
 }

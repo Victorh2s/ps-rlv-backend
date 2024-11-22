@@ -58,4 +58,36 @@ export const userContract = c.router({
         ),
     }),
   },
+
+  signInUser: {
+    method: "POST",
+    path: "/user/signIn",
+    summary:
+      "Authenticates the user and generates an access token for the application",
+    responses: {
+      201: c.type<{
+        message: string;
+        access_token: string;
+        expiresIn: string;
+        user: {
+          id: number;
+        };
+      }>(),
+      400: c.type<{ error: string }>(),
+    },
+    body: z.object({
+      email: z
+        .string()
+        .email("O campo email precisa ser um email válido")
+        .min(1, "O campo email precisa ser preenchido"),
+      password: z
+        .string()
+        .min(8, "A senha deve ter pelo menos 8 caracteres")
+        .max(25, "A senha deve ter no máximo 25 caracteres")
+        .regex(
+          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+          "A senha deve conter pelo menos uma letra maiúscula, um número e um caractere especial",
+        ),
+    }),
+  },
 });

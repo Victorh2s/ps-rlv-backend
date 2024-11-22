@@ -14,6 +14,11 @@ export interface IUpdateUserService {
   userId: number;
 }
 
+export interface IAuthenticateUserService {
+  email: string;
+  password: string;
+}
+
 export abstract class UserRepository {
   abstract registerUser(newUser: IRegisterUser): Promise<void>;
   abstract findUserByEmailOrUsername(
@@ -41,4 +46,13 @@ export abstract class UserRepository {
     newUsername: string,
     userId: number,
   ): Promise<void>;
+  abstract findUserByEmail(email: string): Promise<{
+    id: number;
+    username: string;
+    email: string;
+    password: string;
+    created_at: Date;
+    updated_at: Date;
+    deleted_at: Date;
+  }>;
 }

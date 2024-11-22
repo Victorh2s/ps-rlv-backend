@@ -17,3 +17,9 @@ export class UsernameNotFoundError extends HttpException {
     super("Nenhum usuário foi encontrado.", HttpStatus.NOT_FOUND);
   }
 }
+
+export class UserNotAuthorizaded extends HttpException {
+  constructor() {
+    super("Email ou senha inválidos.", HttpStatus.UNAUTHORIZED);
+  }
+}
