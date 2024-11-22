@@ -5,12 +5,14 @@ import { RegisterUserService } from "src/domain/services/user/register-user.serv
 import { UpdateUserService } from "src/domain/services/user/update-user.service";
 import { AuthenticateUserService } from "src/domain/services/user/authenticate-user.service";
 import { JwtModule } from "@nestjs/jwt";
+import "dotenv/config";
 
 @Module({
   imports: [
     DatabaseModule,
     JwtModule.register({
-      signOptions: { expiresIn: "7d" },
+      secret: process.env.TOKEN_SECRET,
+      signOptions: { expiresIn: process.env.TOKEN_EXPIRATION },
     }),
   ],
   controllers: [UserController],
