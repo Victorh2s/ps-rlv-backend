@@ -1,9 +1,12 @@
-import { Controller } from "@nestjs/common";
+import { Controller, Req, UseGuards } from "@nestjs/common";
 import { RegisterUserService } from "src/domain/services/user/register-user.service";
 import { NestRequestShapes, TsRest, TsRestRequest } from "@ts-rest/nest";
 import { userContract } from "../contracts/user.contract";
 import { UpdateUserService } from "src/domain/services/user/update-user.service";
 import { AuthenticateUserService } from "src/domain/services/user/authenticate-user.service";
+import { AccessDeniedError } from "src/domain/services/errors";
+import { Request } from "express";
+import { JwtAuthGuard } from "../guards/jwt-auth.guard";
 
 type RequestShapes = NestRequestShapes<typeof userContract>;
 
@@ -34,16 +37,21 @@ export class UserController {
   }
 
   @TsRest(userContract.updateUser)
+  @UseGuards(JwtAuthGuard)
   async updateUser(
     @TsRestRequest()
-    {
-      body: { username: newUsername },
-      params: { id: userId },
-    }: RequestShapes["updateUser"],
+    { body: { username: newUsername } }: RequestShapes["updateUser"],
+    @Req() req: Request,
   ) {
+    if (!req["authUser"]) {
+      throw new AccessDeniedError();
+    }
+
+    const authUser = req.authUser;
+
     await this.updateUserService.execute({
       newUsername,
-      userId,
+      userId: +authUser.id,
     });
 
     return {

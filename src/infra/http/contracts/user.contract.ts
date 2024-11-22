@@ -44,9 +44,6 @@ export const userContract = c.router({
       200: c.type<{ message: string }>(),
       400: c.type<{ error: string }>(),
     },
-    pathParams: z.object({
-      id: z.coerce.number(),
-    }),
     body: z.object({
       username: z
         .string()

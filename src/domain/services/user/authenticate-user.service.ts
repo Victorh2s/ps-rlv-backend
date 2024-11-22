@@ -3,7 +3,7 @@ import {
   IAuthenticateUserService,
   UserRepository,
 } from "src/domain/repositories/user-repository";
-import { UsernameNotFoundError, UserNotAuthorizaded } from "../errors";
+import { UsernameNotFoundError, UserNotAuthorizadedError } from "../errors";
 import { JwtService } from "@nestjs/jwt";
 import { compare } from "bcrypt";
 
@@ -22,7 +22,7 @@ export class AuthenticateUserService {
     }
 
     if (!(await compare(password, existingUser.password))) {
-      throw new UserNotAuthorizaded();
+      throw new UserNotAuthorizadedError();
     }
 
     const { id } = existingUser;
