@@ -6,6 +6,7 @@ import { UpdateUserService } from "src/domain/services/user/update-user.service"
 import { AuthenticateUserService } from "src/domain/services/user/authenticate-user.service";
 import { JwtModule } from "@nestjs/jwt";
 import "dotenv/config";
+import { DocumentController } from "./controllers/document.controller";
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import "dotenv/config";
       signOptions: { expiresIn: process.env.TOKEN_EXPIRATION },
     }),
   ],
-  controllers: [UserController],
+  controllers: [UserController, DocumentController],
   providers: [RegisterUserService, UpdateUserService, AuthenticateUserService],
 })
 export class HttpModule {}
